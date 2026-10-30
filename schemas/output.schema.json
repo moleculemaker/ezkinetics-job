@@ -1,21 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Sample tool results",
+  "title": "EZKinetics results",
   "description": "Shape of results.json. The frontend's result types are generated from this schema.",
   "type": "object",
-  "required": ["rows", "artifacts"],
+  "required": ["conditions", "truncated_enzyme_ids", "predictions", "artifacts"],
   "additionalProperties": false,
   "properties": {
-    "rows": {
+    "conditions": {
+      "description": "The assay conditions every pair was predicted at, after defaults.",
+      "type": "object",
+      "required": ["ph", "temperature"],
+      "additionalProperties": false,
+      "properties": {
+        "ph": {"type": "number"},
+        "temperature": {"type": "number", "description": "Degrees Celsius"}
+      }
+    },
+    "truncated_enzyme_ids": {
+      "description": "Enzymes longer than 1022 residues, whose predictions used only their first 1022.",
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "predictions": {
+      "description": "One entry per enzyme-substrate pair, enzymes in input order, then substrates in input order. Values are rounded to 3 decimal places by the method.",
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "length", "molecular_weight_da"],
+        "required": ["enzyme_id", "substrate_id", "kcat_km", "kcat", "km"],
         "additionalProperties": false,
         "properties": {
-          "id": {"type": "string"},
-          "length": {"type": "integer", "minimum": 1},
-          "molecular_weight_da": {"type": "number"}
+          "enzyme_id": {"type": "string"},
+          "substrate_id": {"type": "string"},
+          "kcat_km": {"type": "number", "minimum": 0, "description": "kcat/Km in 1/(mM*s)"},
+          "kcat": {"type": "number", "minimum": 0, "description": "kcat in 1/s"},
+          "km": {"type": "number", "minimum": 0, "description": "Km in mM"}
         }
       }
     },
