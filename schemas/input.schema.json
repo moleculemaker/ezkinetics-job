@@ -52,7 +52,7 @@
             "pattern": "^[^\\s=+@-][^\\s]*$",
             "description": "Substrate SMILES. No whitespace, and no leading =, +, - or @, so it cannot be read as a spreadsheet formula when written to CSV.",
             "not": {"enum": ["#N/A", "#NA", "1.#IND", "1.#QNAN", "<NA>", "N/A", "NA", "NULL", "NaN", "n/a", "nan", "null"]},
-            "$comment": "pandas 1.5.3's default missing-value strings that the pattern allows. The base image's predict.py reads them as missing and the whole job fails. Remove once the image includes EZKinetics-inferencing#4."
+            "$comment": "pandas 1.5.3's default missing-value strings that the pattern allows. They are placeholders, not molecules: today predict.py reads them as missing and the whole job fails, and after EZKinetics-inferencing#4 it would predict on them. Keep this."
           }
         }
       }
