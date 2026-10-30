@@ -23,5 +23,4 @@ docker run --rm \
   -v "$work:/uws" \
   "$image"
 
-cat "$work/out/results.json" "$work/out/predictions.csv"  # TEMP debug
 python3 "$root/scripts/validate.py" "$work/out"
