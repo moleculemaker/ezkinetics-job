@@ -15,6 +15,11 @@ The method runs on CPU, but it loads ESM2-3B (about 11 GB of weights in memory) 
 downloads about 8 GB of model weights on first run. If the smoke test doesn't fit a CI
 runner, rely on the GPU profiling run on the cluster instead.
 
+There is no `examples/expected/`: predictions depend on the hardware. For the example
+(David's known-good P1/glucose pair), a CPU run in CI gives kcat/Km 0.51, kcat 1.543 and
+Km 2.929, while David's `test_output_results.csv` has 0.522, 1.543 and 2.71. The smoke test
+checks the schemas only.
+
 Created from [job-template](https://github.com/moleculemaker/job-template), whose
 instructions follow.
 
