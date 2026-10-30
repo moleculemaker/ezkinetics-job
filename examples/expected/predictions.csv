@@ -1,0 +1,2 @@
+enzyme_id,substrate_id,smiles,pH,temperature (C),kcat/Km (1/mM*1/s),kcat (1/s),Km (mM)
+P1,glucose,OC[C@H]1OC(O)[C@H](O)[C@@H](O)[C@@H]1O,7.0,25.0,0.522,1.543,2.71

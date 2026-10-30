@@ -1,12 +1,22 @@
-# job-template
+# ezkinetics-job
 
-Template for the containerized compute step of an AlphaSynthesis / AlphaSynBio app.
-Each tool gets its own `<tool>-job` repo created from this one. The container wraps the
-method author's code and is run asynchronously by
+The containerized compute step of [EZKinetics](https://github.com/le-yuan/EZKinetics): for
+every enzyme-substrate pair in a job, it predicts kcat, Km and kcat/Km at the job's pH and
+temperature. It is run asynchronously by
 [mmli-backend](https://github.com/moleculemaker/mmli-backend) as a Kubernetes Job.
 
-The included sample tool (protein length and molecular weight) is a complete, runnable
-example of the contract.
+The image builds on David Bianchi's EZKinetics image
+([moleculemaker/EZKinetics-inferencing](https://github.com/moleculemaker/EZKinetics-inferencing)),
+pinned by digest in the `Dockerfile`. `wrapper/tool.py` writes all pairs to a CSV, runs the
+method's `inference/predict.py` on it, and turns the output into `results.json` and
+`predictions.csv`.
+
+The method runs on CPU, but it loads ESM2-3B (about 11 GB of weights in memory) and
+downloads about 8 GB of model weights on first run. If the smoke test doesn't fit a CI
+runner, rely on the GPU profiling run on the cluster instead.
+
+Created from [job-template](https://github.com/moleculemaker/job-template), whose
+instructions follow.
 
 ## The contract
 

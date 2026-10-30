@@ -1,21 +1,23 @@
 {
-  "rows": [
+  "conditions": {
+    "ph": 7.0,
+    "temperature": 25.0
+  },
+  "truncated_enzyme_ids": [],
+  "predictions": [
     {
-      "id": "insulin-b",
-      "length": 30,
-      "molecular_weight_da": 3429.96
-    },
-    {
-      "id": "glucagon",
-      "length": 29,
-      "molecular_weight_da": 3482.79
+      "enzyme_id": "P1",
+      "substrate_id": "glucose",
+      "kcat_km": 0.522,
+      "kcat": 1.543,
+      "km": 2.71
     }
   ],
   "artifacts": [
     {
-      "name": "results.csv",
+      "name": "predictions.csv",
       "media_type": "text/csv",
-      "description": "All rows as CSV"
+      "description": "Every pair's predictions as CSV"
     }
   ]
 }
